@@ -1,0 +1,14 @@
+version: '3'
+services:
+  main: # service name is 'main'
+    build:
+      context: ./project
+      dockerfile: Dockerfile
+      shm_size: "1gb"
+    command:
+      "sleep infinity" # keep container running
+    env_file: # container environment variables that should be hidden, such as API key
+      - ./project/.env
+    volumes: # mount host dir : container dir
+      - ./project:/project
+    network_mode: "host"
